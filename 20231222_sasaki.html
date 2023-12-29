@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Realtime Serch</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input class="search" type="text" v-model="searchInput">
+        <div class="family-name" v-for="name in filteredNames" key:="name">{{ name }}</div>
+    </div>
+    <script>
+        new Vue ({
+            el: '#app',
+            data: {
+                nameList: ['佐藤', '山田', '鈴木', '田中'],
+                searchInput: ''
+            },
+            computed: {
+                filteredNames() {
+                    const searchTerm = this.searchInput.trim();
+                    if (!searchTerm) return this.nameList;
+                    return this.nameList.filter(name => name.includes(searchTerm));
+                }
+            }
+        })
+    </script>
+    <style>
+        .search {
+            border: solid 2px greenyellow;
+            border-radius: 3px;
+        }
+    </style>
+</body>
+</html>
